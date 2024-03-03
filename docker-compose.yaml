@@ -64,6 +64,10 @@ x-airflow-common:
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
+    AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER: gs://test-bucket/logs
+    AIRFLOW__LOGGING__REMOTE_LOGGING: 1
+    AIRFLOW__LOGGING__REMOTE_LOG_CONN_ID: gs://
+    STORAGE_EMULATOR_HOST: 'http://localhost:9023'
     # yamllint disable rule:line-length
     # Use simple http server on scheduler for health checks
     # See https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/check-health.html#scheduler-health-check-server
@@ -295,5 +299,19 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
+  gcp-storage-emulator:
+    image: oittaa/gcp-storage-emulator
+    container_name: gcp-storage-emulator
+    command: start --host=localhost --port=9023 --in-memory --default-bucket=test-bucket
+    hostname: gcp-storage-emulator
+    ports:
+      - "9023:9023"
+    environment:
+      - PORT=9023
+      - STORAGE_EMULATOR_HOST=http://localhost:9023
+    volumes:
+      - gcpstoragevolume:/storage
+
 volumes:
   postgres-db-volume:
+  gcpstoragevolume:
