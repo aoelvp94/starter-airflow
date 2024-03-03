@@ -66,7 +66,8 @@ x-airflow-common:
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
     AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER: gs://test-bucket/logs
     AIRFLOW__LOGGING__REMOTE_LOGGING: 1
-    AIRFLOW__LOGGING__REMOTE_LOG_CONN_ID: gs://
+    AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: google-cloud-platform://
+    AIRFLOW__LOGGING__REMOTE_LOG_CONN_ID: google_cloud_default
     STORAGE_EMULATOR_HOST: 'http://localhost:9023'
     # yamllint disable rule:line-length
     # Use simple http server on scheduler for health checks
