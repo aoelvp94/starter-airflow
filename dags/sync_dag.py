@@ -7,7 +7,7 @@ from airflow.providers.airbyte.operators.airbyte import AirbyteTriggerSyncOperat
 from airflow.providers.airbyte.sensors.airbyte import AirbyteJobSensor
 
 
-AIRBYTE_CONN_ID = os.environ["AIRBYTE_CONN_ID"]
+AIRBYTE_CONN_ID = os.environ["AIRBYTE_CONNECTION_ID"]
 
 with DAG(
     "airbyte_basic_dag",
