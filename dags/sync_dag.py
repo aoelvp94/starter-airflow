@@ -1,5 +1,6 @@
 """Simple sync DAG by using Airbyte."""
 from datetime import datetime
+import os
 
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
