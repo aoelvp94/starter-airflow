@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: source_data
-    schema: source_data
+    schema: restack_demo
     tables:
       - name: stocks_daily
         description: stocks data per day
