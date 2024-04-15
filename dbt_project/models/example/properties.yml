@@ -1,0 +1,38 @@
+version: 2
+
+sources:
+  - name: source_data
+    schema: source_data
+    tables:
+      - name: stocks_daily
+        description: stocks data per day
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns:
+                - date
+                - symbol
+        columns:
+          - name: symbol
+            tests:
+              - not_null
+          - name: date
+            tests:
+              - not_null
+models:
+  - name: obtain_all_currency
+    description: stock data with currency conversion
+    config:
+      materialized: table
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - date
+            - symbol
+            - currency_code
+    columns:
+      - name: date
+        tests:
+          - not_null
+      - name: symbol
+        tests:
+          - not_null
