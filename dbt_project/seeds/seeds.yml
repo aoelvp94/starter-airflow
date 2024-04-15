@@ -1,0 +1,25 @@
+version: 2
+
+seeds:
+  - name: exchange_rates
+    columns:
+      - name: currency_code
+        tests:
+          - not_null
+          - unique
+      - name: value_usd
+        tests:
+          - not_null
+    config:
+      schema: seed_data
+      column_types:
+        load_ts: TIMESTAMP
+  - name: physical_currency_list
+    columns:
+      - name: currency_code
+        tests:
+          - not_null
+      - name: currency_name
+        tests:
+          - not_null
+          

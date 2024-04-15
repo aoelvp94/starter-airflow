@@ -1,0 +1,11 @@
+dbt_project:
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: "{{ env_var('GCP_DATASET') }}"
+      location: "{{ env_var('GCP_DATASET_LOCATION') }}"
+      impersonate_service_account: "{{ env_var('GCP_DBT_SERVICE_ACCOUNT') }}"
+    target: dev
+    
