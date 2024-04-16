@@ -29,3 +29,42 @@ This way once a new version of airflow is released and you upgrade your app via 
 2. Follow steps in the [official Restack documentation](https://www.restack.io/docs/airflow-cicd)
 3. Once you open a pull request a preview environment will be generated.
 4. Once your pull request is merged your initial Airflow application will be provisioned with latest code from the "main" branch.
+
+
+### How to config demo
+
+#### Airbyte
+
+1. Start an Airbyte service on Restack and start the app.
+2. Once setup is done, go to the UI and log in.
+3. Create a source `Alpha Vantage API` to ingest data. Add the public API Key and the symbol to be extracted (e.g. `MSFT`)
+4. Create a destination `Big Query` to write the ingested data. Fill fields like `Project ID`, `Dataset Location`, `Default Dataset ID` and choose the `Standard Inserts` method for testing the E2E pipeline. Put the SA content in `Service Account Key JSON` placeholder. 
+5. Create the connection and select just `time_series_daily` stream of data.
+6. Copy the connection hash id in the URL in a notepad. For example, for https://foo.bar.gcp.restack.it/workspaces/d5f2d913-16cd-44e7-8531-26b7fec1937c/connections/692a8331-2f58-4066-affe-23b71309eab3/status, `692a8331-2f58-4066-affe-23b71309eab3` is the hash code
+
+
+#### Airflow
+1. Start an Airflow service on Restack.
+2. Put the `Dockerfile` of your sepo to build the codebase.
+3. Set the following environment variables:
+   1.  AIRBYTE_CONNECTION_ID: Insert here the copied code from (Airbyte-step 5).
+   2.  GCP_PROJECT_ID
+   3.  GCP_DATASET
+   4.  GCP_DATASET_LOCATION
+   5.  GCP_DBT_SERVICE_ACCOUNT: Put here your impersonate account.
+4. Start the app. Once setup is done, go to Airflow UI and login.
+5. Create an Airbyte connection, go to Admin -> Connections and add a new record with the following fields (port is not mandatory to set):
+   1. conn_id: airbyte_conn
+   2. conn_type: airbyte
+   3. host: The Airbyte URL with `http://` preffix.
+   4. login: Username of Airbyte service
+   5. password: Password of Airbyte service
+6. Turn on `elt_dag` and run the DAG. It should take the data from `Alpha Vantage API` by using an Airbyte Operator and then will run the DBT models on BigQuery by using Astronomer Cosmos.
+
+
+
+#### Superset
+1. Start a Superset service on Restack.
+2. Follow the steps in the [official documentation](https://superset.apache.org/docs/databases/bigquery/#connecting-to-bigquery) to connect to BQ. 
+3. Create a chart by selecting a dataset to query data on BigQuery. 
+
