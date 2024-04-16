@@ -12,10 +12,13 @@ sources:
                 - date
                 - symbol
         columns:
-          - name: symbol
+          - name: _2__high
             tests:
               - not_null
-          - name: date
+          - name: _3__low
+            tests:
+              - not_null
+          - name: _5__volume
             tests:
               - not_null
 models:
@@ -26,13 +29,28 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - date
             - symbol
+            - avg_price_at_currency
+            - avg_num_trades
             - currency_code
+            - processing_date
+            - ingestion_date
     columns:
-      - name: date
+      - name: symbol
         tests:
           - not_null
-      - name: symbol
+      - name: avg_price_at_currency
+        tests:
+          - not_null
+      - name: avg_num_trades
+        tests:
+          - not_null
+      - name: currency_code
+        tests:
+          - not_null
+      - name: ingestion_date
+        tests:
+          - not_null
+      - name: processing_date
         tests:
           - not_null
