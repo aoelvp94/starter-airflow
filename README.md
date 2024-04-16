@@ -33,9 +33,11 @@ This way once a new version of airflow is released and you upgrade your app via 
 
 ### How to config demo
 
+First of all you need to create a stack.
+
 #### Airbyte
 
-1. Start an Airbyte service on Restack and start the app.
+1. Attach an Airbyte service to your stack and start the app.
 2. Once setup is done, go to the UI and log in.
 3. Create a source `Alpha Vantage API` to ingest data. Add the public API Key and the symbol to be extracted (e.g. `MSFT`)
 4. Create a destination `Big Query` to write the ingested data. Fill fields like `Project ID`, `Dataset Location`, `Default Dataset ID` and choose the `Standard Inserts` method for testing the E2E pipeline. Put the SA content in `Service Account Key JSON` placeholder. 
@@ -44,8 +46,8 @@ This way once a new version of airflow is released and you upgrade your app via 
 
 
 #### Airflow
-1. Start an Airflow service on Restack.
-2. Put the `Dockerfile` of your sepo to build the codebase.
+1. Attach an Airflow service to your stack.
+2. Put the `Dockerfile` of your repo to build the codebase.
 3. Set the following environment variables:
    1.  AIRBYTE_CONNECTION_ID: Insert here the copied code from (Airbyte-step 5).
    2.  GCP_PROJECT_ID
@@ -64,7 +66,8 @@ This way once a new version of airflow is released and you upgrade your app via 
 
 
 #### Superset
-1. Start a Superset service on Restack.
-2. Follow the steps in the [official documentation](https://superset.apache.org/docs/databases/bigquery/#connecting-to-bigquery) to connect to BQ. 
-3. Create a chart by selecting a dataset to query data on BigQuery. 
-
+1. Attach a Superset app to your stack.
+2. Put the `Dockerfile` of your repo to build the codebase.
+3. Let's create the connection to BQ so go to Settings -> Database Connections -> +DATABASE -> Choose BigQuery and upload your SA account.
+4. Go to `Datasets` to create a dataset by selecting a table to query data on BigQuery. 
+5. Once dataset created, go to `Charts` to create a chart on the dataset.
