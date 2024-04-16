@@ -4,7 +4,7 @@ sources:
   - name: source_data
     schema: restack_demo
     tables:
-      - name: stocks_daily
+      - name: time_series_daily
         description: stocks data per day
         tests:
           - dbt_utils.unique_combination_of_columns:

@@ -6,7 +6,7 @@ SELECT
 FROM
     {{ source(
         'source_data',
-        'stocks_daily'
+        'time_series_daily'
     ) }}
     daily_data
     LEFT JOIN {{ ref(
