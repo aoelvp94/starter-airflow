@@ -25,7 +25,7 @@ sources:
             tests:
               - not_null
 models:
-  - name: obtain_all_currency
+  - name: example
     description: stock data with currency conversion
     config:
       materialized: table
