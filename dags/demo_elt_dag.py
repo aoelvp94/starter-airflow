@@ -54,7 +54,7 @@ with DAG(
         project_config=ProjectConfig(DBT_PROJECT_PATH),
         profile_config=PROFILE_CONFIG,
         execution_config=EXECUTION_CONFIG,
-        operator_args={"install_deps": True},
+        operator_args={"install_deps": True, "append_env": True},
         default_args={"retries": 1},
     )
 
