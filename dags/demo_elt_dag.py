@@ -28,7 +28,7 @@ with DAG(
     schedule=None,
     catchup=False,
 ) as dag:
-    pre_airbyte_workflow = EmptyOperator(task_id="pre_airbyte_workflow")
+    pre_elt_workflow = EmptyOperator(task_id="pre_elt_workflow")
 
     airbyte_sync_task = AirbyteTriggerSyncOperator(
         task_id="airbyte_sync",
@@ -58,6 +58,6 @@ with DAG(
         default_args={"retries": 1},
     )
 
-    post_airbyte_workflow = EmptyOperator(task_id="post_airbyte_workflow")
+    post_elt_workflow = EmptyOperator(task_id="post_elt_workflow")
 
-    pre_airbyte_workflow >> airbyte_sync_task >> airbyte_sensor_task >> transform_data >> post_airbyte_workflow
+    pre_elt_workflow >> airbyte_sync_task >> airbyte_sensor_task >> transform_data >> post_elt_workflow
