@@ -41,7 +41,7 @@ First of all you need to create a stack.
 2. Once setup is done, go to the UI and log in.
 3. Create a source `Alpha Vantage API` to ingest data. Add the public API Key and the symbol to be extracted (e.g. `MSFT`)
 4. Create a destination `Big Query` to write the ingested data. Fill fields like `Project ID`, `Dataset Location`, `Default Dataset ID` and choose the `Standard Inserts` method for testing the E2E pipeline. Put the SA content in `Service Account Key JSON` placeholder. 
-5. Create the connection and select just `time_series_daily` stream of data.
+5. Create the connection and select just `time_series_daily` stream of data. Set the `Full Refresh | Append` method for sync mode and the `Schedule Type` that must be `manual`.
 6. Copy the connection hash id in the URL in a notepad. For example, for https://foo.bar.gcp.restack.it/workspaces/d5f2d913-16cd-44e7-8531-26b7fec1937c/connections/692a8331-2f58-4066-affe-23b71309eab3/status, `692a8331-2f58-4066-affe-23b71309eab3` is the hash code
 
 
