@@ -2,6 +2,8 @@ ARG RESTACK_PRODUCT_VERSION=2.8.0
 
 FROM apache/airflow:${RESTACK_PRODUCT_VERSION}
 
+USER root
+
 ENV DBT_PROJECT_DIR=/opt/airflow/dbt_project
 ENV DBT_PROFILE_DIR=/opt/airflow/dbt_project/profiles.yml
 
