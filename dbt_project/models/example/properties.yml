@@ -9,8 +9,11 @@ sources:
         tests:
           - dbt_utils.unique_combination_of_columns:
               combination_of_columns:
-                - date
-                - symbol
+                - _1__open
+                - _2__high
+                - _3__low
+                - _4__close
+                - _5__volume
         columns:
           - name: _2__high
             tests:
