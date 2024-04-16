@@ -24,12 +24,6 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 
-seeds:
-  dbt_project:
-    exchange_rates:
-      +post-hook:
-        - "UPDATE {{ this }} SET \"load_ts\" = '{{ run_started_at }}' where \"load_ts\" is null"
-
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 

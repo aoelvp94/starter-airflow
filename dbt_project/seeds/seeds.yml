@@ -12,8 +12,6 @@ seeds:
           - not_null
     config:
       schema: seed_data
-      column_types:
-        load_ts: TIMESTAMP
   - name: physical_currency_list
     columns:
       - name: currency_code
@@ -22,4 +20,3 @@ seeds:
       - name: currency_name
         tests:
           - not_null
-          
