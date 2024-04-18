@@ -76,7 +76,7 @@ def fit_model(df_to_train, alpha, l1_ratio):
     print("Computing regularization path using the elastic net.")
     alphas_enet, coefs_enet, _ = enet_path(X, y, eps=eps, l1_ratio=l1_ratio)
 
-        # Display results
+    # Display results
     fig = plt.figure(1)
     ax = plt.gca()
 

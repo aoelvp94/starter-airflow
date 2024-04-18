@@ -54,7 +54,6 @@ def taskflow_api_etl():
         with mlflow.start_run(run_name=f"elasticnet_{context['execution_date']}"):
             fit_model(df_to_train, alpha, l1_ratio)
             
-
     
     result = get_data_task()
     [fit_model_task(result, 1, 2), fit_model_task(result, 0.5, 4), fit_model_task(result, 2, 1)]
