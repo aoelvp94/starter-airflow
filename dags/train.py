@@ -11,6 +11,7 @@ from itertools import cycle
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from sklearn import datasets
 from sklearn.linear_model import ElasticNet, enet_path
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
@@ -74,7 +75,11 @@ def fit_model(df_to_train, alpha, l1_ratio):
     eps = 5e-3  # the smaller it is the longer is the path
 
     print("Computing regularization path using the elastic net.")
-    alphas_enet, coefs_enet, _ = enet_path(train_x, train_y, eps=eps, l1_ratio=l1_ratio)
+
+    diabetes = datasets.load_diabetes()
+    X = diabetes.data
+    y = diabetes.target
+    alphas_enet, coefs_enet, _ = enet_path(X, y, eps=eps, l1_ratio=l1_ratio)
 
     # Display results
     fig = plt.figure(1)
