@@ -17,7 +17,7 @@ from train import fit_model
 @dag(
     "ETFL_dag_v3",
     default_args={
-    "owner": "MuttData",
+    "owner": "Restack",
     "depends_on_past": False,
     "email": ["airflow@example.com"],
     "email_on_failure": False,
