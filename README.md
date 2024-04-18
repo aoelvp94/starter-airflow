@@ -49,19 +49,20 @@ First of all you need to create a stack.
 1. Attach an Airflow service to your stack.
 2. Put the `Dockerfile` of your repo to build the codebase.
 3. Set the following environment variables:
-   1.  AIRBYTE_CONNECTION_ID: Insert here the copied code from (Airbyte-step 5).
-   2.  GCP_PROJECT_ID
-   3.  GCP_DATASET
-   4.  GCP_DATASET_LOCATION
-   5.  GCP_DBT_SERVICE_ACCOUNT: Put here your impersonate account.
+   1.  GCP_PROJECT_ID
+   2.  GCP_DATASET
+   3.  GCP_DATASET_LOCATION
+   4.  GCP_DBT_SERVICE_ACCOUNT: Put here your impersonate account.
 4. Start the app. Once setup is done, go to Airflow UI and login.
-5. Create an Airbyte connection, go to Admin -> Connections and add a new record with the following fields (port is not mandatory to set):
+5. Set Airflow variables:
+   1. AIRBYTE_CONNECTION_ID: Insert here the copied code from (Airbyte-step 5).
+6. Create an Airbyte connection, go to Admin -> Connections and add a new record with the following fields (port is not mandatory to set):
    1. conn_id: airbyte_conn
    2. conn_type: airbyte
    3. host: The Airbyte URL with `http://` preffix.
    4. login: Username of Airbyte service
    5. password: Password of Airbyte service
-6. Turn on `elt_dag` and run the DAG. It should take the data from `Alpha Vantage API` by using an Airbyte Operator and then will run the DBT models on BigQuery by using Astronomer Cosmos.
+7. Turn on `elt_dag` and run the DAG. It should take the data from `Alpha Vantage API` by using an Airbyte Operator and then will run the DBT models on BigQuery by using Astronomer Cosmos.
 
 
 

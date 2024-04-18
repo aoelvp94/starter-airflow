@@ -10,7 +10,7 @@ from airflow.providers.airbyte.sensors.airbyte import AirbyteJobSensor
 from cosmos import DbtTaskGroup, ExecutionConfig, ProjectConfig, ProfileConfig, RenderConfig
 from cosmos.constants import TestBehavior
 
-AIRBYTE_CONN_ID = os.environ["AIRBYTE_CONNECTION_ID"]
+AIRBYTE_CONN_ID = "{{ var.value.get('AIRBYTE_CONNECTION_ID', 'hash') }}"
 DBT_PROJECT_PATH = os.environ["DBT_PROJECT_DIR"]
 PROFILE_CONFIG = ProfileConfig(
     profile_name="dbt_project",
