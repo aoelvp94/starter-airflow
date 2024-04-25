@@ -4,6 +4,7 @@ import logging
 from datetime import timedelta
 
 import mlflow
+import os
 import pandas as pd
 import numpy as np
 from airflow.decorators import dag, task
@@ -50,6 +51,8 @@ def taskflow_api_etl():
     def fit_model_task(df_to_train, alpha, l1_ratio):
         context = get_current_context()
         mlflow.set_tracking_uri("{{ var.value.get('MLFLOW_TRACKING_URI', 'localhost') }}")
+        os.environ['MLFLOW_TRACKING_USERNAME'] = "{{ var.value.get('MLFLOW_TRACKING_USERNAME', 'user') }}"
+        os.environ['MLFLOW_TRACKING_PASSWORD'] = "{{ var.value.get('MLFLOW_TRACKING_PASSWORD', 'password') }}"
         mlflow.set_experiment("elasticnet_diabetes")
         with mlflow.start_run(run_name=f"elasticnet_{context['execution_date']}"):
             fit_model(df_to_train, alpha, l1_ratio)
